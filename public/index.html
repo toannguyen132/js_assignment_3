@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2>Search on Yelp:</h2>
+        <div class="form-group">
+          <label>Select cuisine</label>
+          <select class="form-control" name="cuisine" id="cuisine">
+            <option value="italian">Italian</option>
+            <option value="mexican">Mexican</option>
+            <option value="chinese">Chinese</option>
+            <option value="japanese">Japanese</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Select soft by</label>
+          <select class="form-control" name="sort" id="sort">
+            <option value="best_match">Best Match</option>
+            <option value="rating">Rating</option>
+            <option value="review_count">Review Count</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Price</label>
+          <select class="form-control" name="price" id="price">
+            <option value="1">Inexpensive</option>
+            <option value="2">Moderate</option>
+            <option value="3">Pricey</option>
+            <option value="4">Ultra High-End</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" id="search">Search</button>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div id="result">
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+  <script src="script.js"></script>
+
+  <script type="text/template" id="restaurant_temp">
+    {{#restaurants}}
+    <div class="list-group mb-4" id="res_{{id}}">
+      <div class="list-group-item item-res">
+        <div class="d-flex w-100 justify-content-between">
+          <h5>{{name}}</h5>
+          <small>{{price}}</small>
+        </div>
+        <div class="d-flex w-100 justify-content-between">
+          <span>Rating: {{rating}}</span>
+          <span>Reviews: {{review_count}} Reviews</span>
+        </div>
+        <div><a href="#" data-id="{{id}}" class="show">Show reviews &rarr;</a></div>
+      </div>
+    </div>
+    {{/restaurants}}
+  </script>
+  <script type="text/template" id="review_temp">
+    {{#reviews}}
+    <div class="list-group-item item-review" id="review_{{id}}">
+      {{text}}
+    </div>
+    {{/reviews}}
+  </script>
+</body>
+</html>
