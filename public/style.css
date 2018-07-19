@@ -1,0 +1,16 @@
+.list-group-reviews{
+    padding: 0;
+}
+
+.toggle{
+    display: none;
+}
+
+.item-review{
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.item-review:last-childe{
+    border-bottom: 0;
+}

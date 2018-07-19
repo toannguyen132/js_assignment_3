@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
@@ -68,14 +69,17 @@
           <span>Rating: {{rating}}</span>
           <span>Reviews: {{review_count}} Reviews</span>
         </div>
-        <div><a href="#" data-id="{{id}}" class="show">Show reviews &rarr;</a></div>
+        <div>
+          <a href="#" data-id="{{id}}" class="show">Show reviews &rarr;</a>
+          <a href="#" data-target="review-list-{{id}}" class="hide toggle">Hide reviews &rarr;</a>
+        </div>
       </div>
     </div>
     {{/restaurants}}
   </script>
   <script type="text/template" id="review_temp">
     {{#reviews}}
-    <div class="list-group-item item-review" id="review_{{id}}">
+    <div class="item-review" id="review_{{id}}">
       {{text}}
     </div>
     {{/reviews}}

@@ -31,6 +31,7 @@ $(document).ready(function(){
     var id = $el.data('id');
     var url = 'http://localhost:3000/reviews/' + id;
     var $containter = $('#res_' + id);
+    var $hideButton = $el.siblings('.hide');
 
     $.ajax({
       url: url,
@@ -41,11 +42,21 @@ $(document).ready(function(){
         var result = {reviews: res};
         Mustache.parse(reviewTemplate);
         var rendereddHtml = Mustache.render(reviewTemplate, result);
-        var reviews = $(rendereddHtml);
+        var reviews = $('<div class="list-group-item list-group-reviews" id="review-list-'+ id +'">'  + rendereddHtml + '</div>');
         $containter.append(reviews);
         reviews.hide().slideDown();
+
+        /// 
+        $hideButton.show();
       }
     })
+  });
+
+  $('#result').on('click', '.toggle', function(e){
+    e.preventDefault();
+    $el = $(e.currentTarget);
+    $target = $('#' + $el.data('target'));
+    $target.slideToggle();
   });
 
 });
