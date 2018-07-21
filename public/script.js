@@ -55,8 +55,15 @@ $(document).ready(function(){
   $('#result').on('click', '.toggle', function(e){
     e.preventDefault();
     $el = $(e.currentTarget);
+    $el.toggleClass('hide');
     $target = $('#' + $el.data('target'));
     $target.slideToggle();
+
+    if ($el.hasClass('hide')){
+      $el.text('Hide Reviews');
+    } else {
+      $el.text('Show Reviews');
+    }
   });
 
 });
