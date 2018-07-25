@@ -45,6 +45,10 @@ $(document).ready(function(){
         var reviews = $('<div class="list-group-item list-group-reviews" id="review-list-'+ id +'">'  + rendereddHtml + '</div>');
         $containter.append(reviews);
         reviews.hide().slideDown();
+        $containter.addClass('reviews-shown')
+
+        // hide all other reviews
+        $containter.siblings('.list-group.reviews-shown').removeClass('reviews-shown').find('.list-group-reviews').slideUp();
 
         /// 
         $hideButton.show();
@@ -55,15 +59,23 @@ $(document).ready(function(){
   $('#result').on('click', '.toggle', function(e){
     e.preventDefault();
     $el = $(e.currentTarget);
-    $el.toggleClass('hide');
     $target = $('#' + $el.data('target'));
-    $target.slideToggle();
+    $containter = $el.closest('.list-group');
 
-    if ($el.hasClass('hide')){
-      $el.text('Hide Reviews');
-    } else {
+    if ($containter.hasClass('reviews-shown')){
+      $target.slideUp();
+      $containter.removeClass('reviews-shown');
       $el.text('Show Reviews');
+
+    } else {
+      $target.slideDown();
+      $containter.addClass('reviews-shown');
+      $el.text('Hide Reviews');
+
+      $containter.siblings('.list-group.reviews-shown').removeClass('reviews-shown').find('.list-group-reviews').slideUp();
     }
   });
+
+  
 
 });
