@@ -42,13 +42,13 @@ $(document).ready(function(){
         var result = {reviews: res};
         Mustache.parse(reviewTemplate);
         var rendereddHtml = Mustache.render(reviewTemplate, result);
-        var reviews = $('<div class="list-group-item list-group-reviews" id="review-list-'+ id +'">'  + rendereddHtml + '</div>');
+        var reviews = $('<div class="list-group-item list-group-reviews" id="review-list-'+ id +'">'  + rendereddHtml + '</div>').hide();
         $containter.append(reviews);
-        reviews.hide().slideDown();
-        $containter.addClass('reviews-shown')
+        
+        expandReviews($containter);
 
         // hide all other reviews
-        $containter.siblings('.list-group.reviews-shown').removeClass('reviews-shown').find('.list-group-reviews').slideUp();
+        collapseReviews($containter.siblings('.list-group.expanded'));
 
         /// 
         $hideButton.show();
@@ -62,20 +62,32 @@ $(document).ready(function(){
     $target = $('#' + $el.data('target'));
     $containter = $el.closest('.list-group');
 
-    if ($containter.hasClass('reviews-shown')){
-      $target.slideUp();
-      $containter.removeClass('reviews-shown');
-      $el.text('Show Reviews');
+    if ($containter.hasClass('expanded')){
+      collapseReviews($containter);
 
     } else {
-      $target.slideDown();
-      $containter.addClass('reviews-shown');
-      $el.text('Hide Reviews');
-
-      $containter.siblings('.list-group.reviews-shown').removeClass('reviews-shown').find('.list-group-reviews').slideUp();
+      expandReviews($containter);
+      collapseReviews($containter.siblings('.list-group.expanded'))
     }
   });
 
-  
+  var expandReviews = function($el){
+    var $textHolder = $el.find('.toggle');
+    var $reviewContainer = $el.find('.list-group-reviews')
+
+    $el.addClass('expanded');
+    $textHolder.text('Hide Reviews');
+    $reviewContainer.slideDown();
+  }
+
+  var collapseReviews = function($el){
+    var $textHolder = $el.find('.toggle');
+    var $reviewContainer = $el.find('.list-group-reviews')
+
+    $el.removeClass('expanded');
+    $textHolder.text('Show Reviews');
+    $reviewContainer.slideUp();
+    
+  }
 
 });
